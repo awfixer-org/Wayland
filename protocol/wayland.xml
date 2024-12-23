@@ -502,7 +502,9 @@
       <description summary="compositor releases buffer">
 	Sent when this wl_buffer is no longer used by the compositor.
 	The client is now free to reuse or destroy this buffer and its
-	backing storage.
+	backing storage. (If the client already destroyed the buffer earlier,
+	the buffer release callback will not be called, and the client cannot
+	safely destroy or reuse its backing storage)
 
 	If a client receives a release event before the frame callback
 	requested in the same wl_surface.commit that attaches this
